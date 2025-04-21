@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Search, Filter, PlusCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -90,7 +90,7 @@ const SAMPLE_INVENTORY = [
 
 const InventoryList = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [categoryFilter, setCategoryFilter] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("all");
   const [sortOption, setSortOption] = useState("name-asc");
   const [filteredInventory, setFilteredInventory] = useState(SAMPLE_INVENTORY);
 
@@ -109,7 +109,7 @@ const InventoryList = () => {
     }
     
     // Apply category filter
-    if (categoryFilter) {
+    if (categoryFilter && categoryFilter !== "all") {
       result = result.filter(item => item.category === categoryFilter);
     }
     
@@ -130,6 +130,11 @@ const InventoryList = () => {
     
     setFilteredInventory(result);
   };
+
+  // Effect to apply filters whenever dependencies change
+  useEffect(() => {
+    applyFilters();
+  }, [searchQuery, categoryFilter, sortOption]);
 
   // Handle search input
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -167,7 +172,7 @@ const InventoryList = () => {
               <SelectValue placeholder="All Categories" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Categories</SelectItem>
+              <SelectItem value="all">All Categories</SelectItem>
               {categories.map(category => (
                 <SelectItem key={category} value={category}>{category}</SelectItem>
               ))}
@@ -214,7 +219,7 @@ const InventoryList = () => {
             <p className="text-muted-foreground">No inventory items found with the current filters.</p>
             <Button variant="link" onClick={() => {
               setSearchQuery("");
-              setCategoryFilter("");
+              setCategoryFilter("all");
               setSortOption("name-asc");
             }}>
               Reset Filters
