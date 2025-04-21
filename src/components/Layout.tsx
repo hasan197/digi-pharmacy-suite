@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { 
   Database, 
-  Capsules, 
+  Pill, 
   FileText, 
   Users, 
   Home,
@@ -23,7 +23,7 @@ type NavItem = {
 
 const navItems: NavItem[] = [
   { icon: Home, label: "Dashboard", path: "/" },
-  { icon: Capsules, label: "Inventory", path: "/inventory" },
+  { icon: Pill, label: "Inventory", path: "/inventory" },
   { icon: FileText, label: "Prescriptions", path: "/prescriptions" },
   { icon: Users, label: "Customers", path: "/customers" },
   { icon: Database, label: "Sales", path: "/sales" },

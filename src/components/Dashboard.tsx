@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { 
   ShoppingCart, 
-  Capsules,
+  Pill,
   FileText,
   Users,
   Clock
@@ -11,6 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import StatCard from "@/components/ui/StatCard";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
 import {
   AreaChart,
   Area,
@@ -119,7 +120,7 @@ const Dashboard = () => {
           title="Inventory Items" 
           value="1,245"
           description="42 items low on stock"
-          icon={<Capsules size={20} />}
+          icon={<Pill size={20} />}
         />
         <StatCard 
           title="Prescriptions" 
